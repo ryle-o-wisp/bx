@@ -824,6 +824,7 @@ function toolchain(_buildDir, _libDir)
 			"NoImportLib",
 		}
 		includedirs {
+			"${ANDROID_NDK_ROOT}/sysroot/usr/include",
 			"$(ANDROID_NDK_ROOT)/sources/cxx-stl/llvm-libc++/include",
 			"$(ANDROID_NDK_ROOT)/sources/android/native_app_glue",
 		}
@@ -887,12 +888,10 @@ function toolchain(_buildDir, _libDir)
 		targetdir (path.join(_buildDir, "android-arm/bin"))
 		objdir (path.join(_buildDir, "android-arm/obj"))
 		libdirs {
-			path.join(_libDir, "lib/android-arm"),
 			"$(ANDROID_NDK_ROOT)/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a",
 		}
 		includedirs {
-			"$(ANDROID_NDK_ROOT)/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/include",
-			"$(ANDROID_NDK_ROOT)/sources/cxx-stl/llvm-libc++/include",
+			"$(ANDROID_NDK_ROOT)/sysroot/usr/include/arm-linux-androideabi",
 		}
 		buildoptions {
 			"-gcc-toolchain $(ANDROID_NDK_ARM)",
@@ -923,7 +922,7 @@ function toolchain(_buildDir, _libDir)
 			"$(ANDROID_NDK_ROOT)/sources/cxx-stl/llvm-libc++/libs/mips",
 		}
 		includedirs {
-			"$(ANDROID_NDK_ROOT)/sources/cxx-stl/llvm-libc++/libs/mips/include",
+			"$(ANDROID_NDK_ROOT)/sysroot/usr/include/mipsel-linux-androideabi",
 		}
 		buildoptions {
 			"-gcc-toolchain $(ANDROID_NDK_MIPS)",
@@ -946,11 +945,10 @@ function toolchain(_buildDir, _libDir)
 		targetdir (path.join(_buildDir, "android-x86/bin"))
 		objdir (path.join(_buildDir, "android-x86/obj"))
 		libdirs {
-			path.join(_libDir, "lib/android-x86"),
 			"$(ANDROID_NDK_ROOT)/sources/cxx-stl/llvm-libc++/libs/x86",
 		}
 		includedirs {
-			"$(ANDROID_NDK_ROOT)/sources/cxx-stl/llvm-libc++/libs/x86/include",
+			"$(ANDROID_NDK_ROOT)/sysroot/usr/include/x86_64-linux-android",
 		}
 		buildoptions {
 			"-gcc-toolchain $(ANDROID_NDK_X86)",
@@ -965,6 +963,7 @@ function toolchain(_buildDir, _libDir)
 			"-Wundef",
 		}
 		linkoptions {
+			"-v",
 			"-gcc-toolchain $(ANDROID_NDK_X86)",
 			"--sysroot=" .. path.join("$(ANDROID_NDK_ROOT)/platforms", androidPlatform, "arch-x86"),
 			path.join("$(ANDROID_NDK_ROOT)/platforms", androidPlatform, "arch-x86/usr/lib/crtbegin_so.o"),
